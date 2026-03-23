@@ -123,7 +123,10 @@ Search query parameters use Python lists where the API expects comma-separated s
 
 ## CI
 
-On every push to **`main`**, GitHub Actions builds a **wheel** and a **source `.zip`** and uploads them as workflow artifacts (see `.github/workflows/release.yml`).
+GitHub Actions (`.github/workflows/release.yml`):
+
+- **Push to `main`:** builds a wheel and source `.zip` and uploads them as **workflow artifacts** (Actions tab → run → Artifacts).
+- **Push a version tag** matching `v*` (e.g. `git tag v0.1.0 && git push origin v0.1.0`): attaches the same files to a **GitHub Release** for that tag.
 
 ## License
 
