@@ -121,13 +121,8 @@ Search query parameters use Python lists where the API expects comma-separated s
 | `gopro/config.py` | `load_dotenv`, `GP_ACCESS_TOKEN` |
 | `setup.py` | Package metadata and dependencies |
 
-## CI
-
-GitHub Actions (`.github/workflows/release.yml`):
-
-- **Push to `main`:** builds a wheel and source `.zip` and uploads them as **workflow artifacts** (Actions tab → run → Artifacts).
-- **Push a version tag** matching `v*` (e.g. `git tag v0.1.0 && git push origin v0.1.0`): attaches the same files to a **GitHub Release** for that tag.
-
 ## License
 
-Specify your license in `setup.py` / a `LICENSE` file if you publish this package.
+This project is licensed under the [MIT License](LICENSE).
+
+GoPro, Quik, and related marks are trademarks of their respective owners. This software is not affiliated with or endorsed by GoPro.
