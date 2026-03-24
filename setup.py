@@ -6,8 +6,8 @@ ROOT = Path(__file__).resolve().parent
 README = (ROOT / "README.md").read_text(encoding="utf-8")
 
 setuptools.setup(
-    name="gopro",
-    version="0.0.1",
+    name="gopro-api",
+    version="0.0.2",
     author="himewel",
     author_email="welberthime@gmail.com",
     description=(
@@ -16,10 +16,10 @@ setuptools.setup(
     ),
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/himewel/gopro",
+    url="https://github.com/himewel/gopro-api",
     project_urls={
-        "Bug Tracker": "https://github.com/himewel/gopro/issues",
-        "Source": "https://github.com/himewel/gopro",
+        "Bug Tracker": "https://github.com/himewel/gopro-api/issues",
+        "Source": "https://github.com/himewel/gopro-api",
     },
     license="MIT",
     license_files=["LICENSE"],
@@ -37,18 +37,18 @@ setuptools.setup(
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Multimedia :: Graphics :: Capture :: Digital Camera",
     ],
-    keywords="gopro quik cloud api async aiohttp media",
+    keywords="gopro quik cloud api async aiohttp media gopro-api",
     packages=setuptools.find_packages(),
     python_requires=">=3.10",
     install_requires=[
-        "aiohttp>=3.11.14",
-        "python-dotenv>=1.0.1",
-        "pydantic>=2.10.6",
-        "requests>=2.32.3",
+        "aiohttp~=3.11.14",
+        "python-dotenv~=1.0.1",
+        "pydantic~=2.10.6",
+        "requests~=2.32.3",
     ],
     extras_require={
         "dev": [
-            "build>=1.0.0",
+            "build~=1.0.0",
         ],
     },
 )

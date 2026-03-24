@@ -4,4 +4,4 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-GP_ACCESS_TOKEN = os.environ["GP_ACCESS_TOKEN"]
+GP_ACCESS_TOKEN = os.getenv("GP_ACCESS_TOKEN")
