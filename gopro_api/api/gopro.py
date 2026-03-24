@@ -1,11 +1,12 @@
 import aiohttp
 
-from gopro.config import GP_ACCESS_TOKEN
-from gopro.api.models import GoProMediaSearchParams, GoProMediaDownloadResponse, GoProMediaSearchResponse
+from gopro_api.config import GP_ACCESS_TOKEN
+from gopro_api.api.models import GoProMediaSearchParams, GoProMediaDownloadResponse, GoProMediaSearchResponse
 
 
 class GoProAPI:
-    def __init__(self, *, timeout: float = 10.0) -> None:
+    def __init__(self, access_token: str | None = None, timeout: float = 10.0) -> None:
+        self.access_token = access_token or GP_ACCESS_TOKEN
         self._timeout = aiohttp.ClientTimeout(total=timeout)
         self._session: aiohttp.ClientSession | None = None
 
@@ -15,7 +16,7 @@ class GoProAPI:
 
     def get_headers(self, accept: str) -> dict[str, str]:
         return {
-            "Cookie": "gp_access_token=" + GP_ACCESS_TOKEN,
+            "Cookie": "gp_access_token=" + self.access_token,
             "Accept": accept,
         }
 

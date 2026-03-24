@@ -1,4 +1,4 @@
-# gopro
+# gopro-api
 
 Small Python client for the **GoPro cloud / Quik** media API (`api.gopro.com`): search your library and fetch download metadata, using **async I/O** (`aiohttp`) and **Pydantic** models.
 
@@ -23,8 +23,16 @@ pip install -e .
 Or install from a built wheel once you have one:
 
 ```bash
-pip install ./dist/gopro-0.1.0-py3-none-any.whl
+pip install ./dist/gopro_api-0.0.1-py3-none-any.whl
 ```
+
+Published installs use the distribution name **`gopro-api`**:
+
+```bash
+pip install gopro-api
+```
+
+Import the library as **`gopro_api`** (underscore).
 
 ## Configuration
 
@@ -80,8 +88,8 @@ Always use `GoProAPI` as an **async context manager** so the underlying `aiohttp
 import asyncio
 from datetime import datetime
 
-from gopro.api.gopro import GoProAPI
-from gopro.api.models import CapturedRange, GoProMediaSearchParams
+from gopro_api.api.gopro import GoProAPI
+from gopro_api.api.models import CapturedRange, GoProMediaSearchParams
 
 
 async def main() -> None:
@@ -107,7 +115,7 @@ if __name__ == "__main__":
 
 ### Models
 
-- **Requests:** `GoProMediaSearchParams`, `CapturedRange`, and related defaults live in `gopro.api.models`.
+- **Requests:** `GoProMediaSearchParams`, `CapturedRange`, and related defaults live in `gopro_api.api.models`.
 - **Responses:** Parsed JSON types (search hits, download URLs, pagination) are defined in the same module.
 
 Search query parameters use Python lists where the API expects comma-separated strings; serialization is handled when calling `model_dump()`.
@@ -116,10 +124,17 @@ Search query parameters use Python lists where the API expects comma-separated s
 
 | Path | Role |
 |------|------|
-| `gopro/api/gopro.py` | `GoProAPI` — `search`, `download` |
-| `gopro/api/models.py` | Pydantic request/response models |
-| `gopro/config.py` | `load_dotenv`, `GP_ACCESS_TOKEN` |
+| `gopro_api/api/gopro.py` | `GoProAPI` — `search`, `download` |
+| `gopro_api/api/models.py` | Pydantic request/response models |
+| `gopro_api/config.py` | `load_dotenv`, `GP_ACCESS_TOKEN` |
 | `setup.py` | Package metadata and dependencies |
+
+## CI
+
+GitHub Actions (`.github/workflows/release.yml`):
+
+- **Push to `main`:** builds a wheel and source `.zip` and uploads them as **workflow artifacts**.
+- **Push a version tag** matching `v*` (e.g. `git tag v0.0.1 && git push origin v0.0.1`): attaches the same files to a **GitHub Release** for that tag.
 
 ## License
 

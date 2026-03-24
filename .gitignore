@@ -1,5 +1,5 @@
 **/__pycache__/
-**/gopro.egg-info/
+**/*.egg-info/
 **/build/
 **/dist/
 **/.env
