@@ -1,11 +1,7 @@
 # gopro-api
 
 <p align="center">
-  <img src="assets/logo.svg" width="120" height="120" alt="gopro-api logo"/>
-</p>
-
-<p align="center">
-  <img src="assets/repo-card.svg" width="1280" height="720" alt="gopro-api social"/>
+  <img src="assets/repo-card.svg" width="1280" height="640" alt="gopro-api social"/>
 </p>
 
 Unofficial Python client for the **GoPro cloud / Quik** HTTP API at [`api.gopro.com`](https://api.gopro.com): **search** your library and **fetch download metadata** (CDN URLs, filenames, variants). Built with **Pydantic** models, plus **sync** (`requests`) and **async** (`aiohttp`) clients and a small **`gopro-api`** CLI.
