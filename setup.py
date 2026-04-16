@@ -54,6 +54,8 @@ setuptools.setup(
     extras_require={
         "dev": [
             "build~=1.0.0",
+            "black~=24.10.0",
+            "pylint~=3.3.0",
         ],
     },
 )
