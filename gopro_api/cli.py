@@ -92,7 +92,11 @@ def _format_search_item_plain(item: GoProMediaSearchItem) -> str:
     row = item.model_dump(mode="json")
     cells = ["" if row.get(c) is None else str(row[c]) for c in _SEARCH_ITEM_COLUMNS]
     extra = _search_item_extras(item)
-    cells.append("" if not extra else json.dumps(extra, ensure_ascii=False, separators=(",", ":")))
+    cells.append(
+        ""
+        if not extra
+        else json.dumps(extra, ensure_ascii=False, separators=(",", ":"))
+    )
     return "\t".join(cells)
 
 

@@ -205,9 +205,7 @@ class AsyncGoProClient:
     # Low-level proxies
     # ------------------------------------------------------------------
 
-    async def search(
-        self, params: GoProMediaSearchParams
-    ) -> GoProMediaSearchResponse:
+    async def search(self, params: GoProMediaSearchParams) -> GoProMediaSearchResponse:
         """Proxy to ``AsyncGoProAPI.search``."""
         return await self._api.search(params)
 
