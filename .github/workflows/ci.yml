@@ -31,10 +31,10 @@ jobs:
         run: uv pip install --system -e ".[dev]"
 
       - name: Black (pyproject.toml [tool.black])
-        run: black --check gopro_api
+        run: uv run black --check gopro_api
 
       - name: Pylint (pyproject.toml [tool.pylint])
-        run: pylint gopro_api --recursive=y
+        run: uv run pylint gopro_api --recursive=y
 
       - name: Build wheel and sdist (pyproject.toml [build-system])
         run: uv build
