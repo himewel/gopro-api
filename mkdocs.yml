@@ -6,12 +6,27 @@ repo_name: himewel/gopro-api
 theme:
   name: material
   palette:
-    scheme: default
-    primary: deep purple
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: grey
+      accent: green
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: grey
+      accent: green
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.top
     - search.suggest
+    - search.highlight
+    - content.code.copy
   version_provider: mike
 
 extra:
