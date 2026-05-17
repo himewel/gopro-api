@@ -12,7 +12,7 @@
       
       
       
-        <link rel="next" href="api/api/">
+        <link rel="next" href="getting-started/">
       
       
         
@@ -482,10 +482,129 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#quick-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick links
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -519,10 +638,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -540,8 +659,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -907,6 +1026,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#quick-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick links
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -927,7 +1057,7 @@
   
 
 
-<h1 id="gopro-api">gopro-api</h1>
+<h1 id="gopro-api">gopro-api<a class="headerlink" href="#gopro-api" title="Permanent link">&para;</a></h1>
 <p><a href="https://pypi.org/project/gopro-api/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/gopro-api" /></a>
 <a href="https://pypi.org/project/gopro-api/"><img alt="Python versions" src="https://img.shields.io/pypi/pyversions/gopro-api" /></a>
 <a href="https://github.com/himewel/gopro-api/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/himewel/gopro-api" /></a>
@@ -936,7 +1066,7 @@
 <a href="https://himewel.github.io/gopro-api/"><img alt="Docs" src="https://img.shields.io/badge/docs-MkDocs-blue" /></a></p>
 <p>Unofficial Python client for the <strong>GoPro cloud / Quik</strong> HTTP API at <a href="https://api.gopro.com"><code>api.gopro.com</code></a>: <strong>search</strong> your library and <strong>fetch download metadata</strong> (CDN URLs, filenames, variants). Built with <strong>Pydantic</strong> models, plus <strong>sync</strong> (<code>requests</code>) and <strong>async</strong> (<code>aiohttp</code>) clients and a small <strong><code>gopro-api</code></strong> CLI.</p>
 <p>This project is not affiliated with or endorsed by GoPro.</p>
-<h2 id="features">Features</h2>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><code>GoProAPI</code></strong> — synchronous client (<code>requests</code>), <code>with</code> context manager  </li>
 <li><strong><code>AsyncGoProAPI</code></strong> — async client (<code>aiohttp</code>), <code>async with</code> context manager  </li>
@@ -944,37 +1074,37 @@
 <li><strong>CLI</strong> — <code>gopro-api search</code>, <code>gopro-api info</code>, <code>gopro-api pull</code>  </li>
 <li><strong><code>GP_ACCESS_TOKEN</code></strong> from environment / <code>.env</code> (browser cookie value)</li>
 </ul>
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Python <strong>3.10+</strong></li>
 <li><strong><code>GP_ACCESS_TOKEN</code></strong> — see <a href="#configuration">Configuration</a></li>
 </ul>
-<h2 id="install">Install</h2>
+<h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <p>From the repository root:</p>
-<pre><code class="language-bash">python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-pip install -e .
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate<span class="w">   </span><span class="c1"># Windows: .venv\Scripts\activate</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</span></code></pre></div>
 <p>From a local wheel (name matches your build):</p>
-<pre><code class="language-bash">pip install ./dist/gopro_api-*-py3-none-any.whl
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>./dist/gopro_api-*-py3-none-any.whl
+</span></code></pre></div>
 <p>Published package on PyPI (distribution name <strong><code>gopro-api</code></strong>, import <strong><code>gopro_api</code></strong>):</p>
-<pre><code class="language-bash">pip install gopro-api
-</code></pre>
-<h2 id="cli">CLI</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pip<span class="w"> </span>install<span class="w"> </span>gopro-api
+</span></code></pre></div>
+<h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
 <p>After install, <strong><code>gopro-api</code></strong> is on your <code>PATH</code>:</p>
-<pre><code class="language-bash">gopro-api --help
-gopro-api --version
-gopro-api search --start 2026-03-01 --end 2026-03-03 --per-page 30
-gopro-api search --start 2026-03-01 --end 2026-03-03 --all-pages
-gopro-api search --start 2026-03-01 --end 2026-03-03 --json
-gopro-api info MEDIA_ID
-gopro-api info MEDIA_ID --json
-gopro-api pull MEDIA_ID ./downloads
-gopro-api pull MEDIA_ID ./downloads --height 1080
-gopro-api pull MEDIA_ID ./downloads --width 1920 --height 1080
-</code></pre>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>gopro-api<span class="w"> </span>--help
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>gopro-api<span class="w"> </span>--version
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>gopro-api<span class="w"> </span>search<span class="w"> </span>--start<span class="w"> </span><span class="m">2026</span>-03-01<span class="w"> </span>--end<span class="w"> </span><span class="m">2026</span>-03-03<span class="w"> </span>--per-page<span class="w"> </span><span class="m">30</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>gopro-api<span class="w"> </span>search<span class="w"> </span>--start<span class="w"> </span><span class="m">2026</span>-03-01<span class="w"> </span>--end<span class="w"> </span><span class="m">2026</span>-03-03<span class="w"> </span>--all-pages
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>gopro-api<span class="w"> </span>search<span class="w"> </span>--start<span class="w"> </span><span class="m">2026</span>-03-01<span class="w"> </span>--end<span class="w"> </span><span class="m">2026</span>-03-03<span class="w"> </span>--json
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>gopro-api<span class="w"> </span>info<span class="w"> </span>MEDIA_ID
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>gopro-api<span class="w"> </span>info<span class="w"> </span>MEDIA_ID<span class="w"> </span>--json
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>gopro-api<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./downloads
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>gopro-api<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./downloads<span class="w"> </span>--height<span class="w"> </span><span class="m">1080</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>gopro-api<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./downloads<span class="w"> </span>--width<span class="w"> </span><span class="m">1920</span><span class="w"> </span>--height<span class="w"> </span><span class="m">1080</span>
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -999,19 +1129,19 @@ gopro-api pull MEDIA_ID ./downloads --width 1920 --height 1080
 </table>
 <p>Global <strong><code>--timeout</code></strong> (seconds, default <strong><code>60</code></strong>) applies to API calls and to <strong><code>pull</code></strong> CDN downloads (<code>requests.get</code>).</p>
 <p>Run without an installed script:</p>
-<pre><code class="language-bash">python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-02
-python -m gopro_api.cli info MEDIA_ID
-python -m gopro_api.cli pull MEDIA_ID ./out
-python -m gopro_api.cli pull MEDIA_ID ./out --height 720
-</code></pre>
-<h2 id="configuration">Configuration</h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>search<span class="w"> </span>--start<span class="w"> </span><span class="m">2026</span>-03-01<span class="w"> </span>--end<span class="w"> </span><span class="m">2026</span>-03-02
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>info<span class="w"> </span>MEDIA_ID
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./out
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./out<span class="w"> </span>--height<span class="w"> </span><span class="m">720</span>
+</span></code></pre></div>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p><code>gopro_api.config</code> reads settings from the environment and from a <code>.env</code> file in the current working directory via <strong>pydantic-settings</strong>. The only required setting is <strong><code>GP_ACCESS_TOKEN</code></strong>.</p>
 <p>Example <code>.env</code>:</p>
-<pre><code class="language-env">GP_ACCESS_TOKEN=your_token_here
-</code></pre>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>GP_ACCESS_TOKEN=your_token_here
+</span></code></pre></div>
 <p>The clients send it as a cookie: <code>gp_access_token=&lt;value&gt;</code>. Put <strong>only the token string</strong> in <code>GP_ACCESS_TOKEN</code> (not the <code>gp_access_token=</code> prefix).</p>
 <p>You can override the token in code: <code>GoProAPI(access_token="...")</code> or <code>AsyncGoProAPI(access_token="...")</code>.</p>
-<h3 id="retrieving-gp_access_token-from-your-browser">Retrieving <code>gp_access_token</code> from your browser</h3>
+<h3 id="retrieving-gp_access_token-from-your-browser">Retrieving <code>gp_access_token</code> from your browser<a class="headerlink" href="#retrieving-gp_access_token-from-your-browser" title="Permanent link">&para;</a></h3>
 <p>Sign in to the GoPro web app (e.g. <a href="https://gopro.com">gopro.com</a> media / Quik). The site sets a cookie <strong><code>gp_access_token</code></strong>.</p>
 <p><strong>Chrome / Edge / Brave</strong></p>
 <ol>
@@ -1034,69 +1164,69 @@ python -m gopro_api.cli pull MEDIA_ID ./out --height 720
 <li>Treat the token like a password.</li>
 </ul>
 <p><strong>Security:</strong> Do not commit <code>.env</code> or tokens. Keep <code>.env</code> in <code>.gitignore</code>.</p>
-<h2 id="library-usage">Library usage</h2>
-<h3 id="async-asyncgoproapi">Async (<code>AsyncGoProAPI</code>)</h3>
-<pre><code class="language-python">import asyncio
-from datetime import datetime
-
-from gopro_api.api import AsyncGoProAPI
-from gopro_api.api.models import CapturedRange, GoProMediaSearchParams
-
-
-async def main() -&gt; None:
-    params = GoProMediaSearchParams(
-        captured_range=CapturedRange(
-            start=datetime.fromisoformat(&quot;2026-03-01&quot;),
-            end=datetime.fromisoformat(&quot;2026-03-02&quot;),
-        ),
-        per_page=50,
-        page=1,
-    )
-
-    async with AsyncGoProAPI() as api:
-        search = await api.search(params)
-        for item in search.embedded.media:
-            meta = await api.download(item.id)
-            print(meta.filename, len(meta.embedded.files), &quot;files&quot;)
-
-
-if __name__ == &quot;__main__&quot;:
-    asyncio.run(main())
-</code></pre>
-<h3 id="sync-goproapi">Sync (<code>GoProAPI</code>)</h3>
-<pre><code class="language-python">from datetime import datetime
-
-from gopro_api.api import GoProAPI
-from gopro_api.api.models import CapturedRange, GoProMediaSearchParams
-
-
-def main() -&gt; None:
-    params = GoProMediaSearchParams(
-        captured_range=CapturedRange(
-            start=datetime.fromisoformat(&quot;2026-03-01&quot;),
-            end=datetime.fromisoformat(&quot;2026-03-02&quot;),
-        ),
-        per_page=50,
-        page=1,
-    )
-
-    with GoProAPI() as api:
-        search = api.search(params)
-        for item in search.embedded.media:
-            meta = api.download(item.id)
-            print(meta.filename, len(meta.embedded.files), &quot;files&quot;)
-
-
-if __name__ == &quot;__main__&quot;:
-    main()
-</code></pre>
-<h3 id="models">Models</h3>
+<h2 id="library-usage">Library usage<a class="headerlink" href="#library-usage" title="Permanent link">&para;</a></h2>
+<h3 id="async-asyncgoproapi">Async (<code>AsyncGoProAPI</code>)<a class="headerlink" href="#async-asyncgoproapi" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">gopro_api.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGoProAPI</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">gopro_api.api.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CapturedRange</span><span class="p">,</span> <span class="n">GoProMediaSearchParams</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="n">params</span> <span class="o">=</span> <span class="n">GoProMediaSearchParams</span><span class="p">(</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="n">captured_range</span><span class="o">=</span><span class="n">CapturedRange</span><span class="p">(</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>            <span class="n">start</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s2">&quot;2026-03-01&quot;</span><span class="p">),</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>            <span class="n">end</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s2">&quot;2026-03-02&quot;</span><span class="p">),</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="p">),</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="n">per_page</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="p">)</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncGoProAPI</span><span class="p">()</span> <span class="k">as</span> <span class="n">api</span><span class="p">:</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>        <span class="n">search</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">search</span><span class="o">.</span><span class="n">embedded</span><span class="o">.</span><span class="n">media</span><span class="p">:</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>            <span class="n">meta</span> <span class="o">=</span> <span class="k">await</span> <span class="n">api</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">embedded</span><span class="o">.</span><span class="n">files</span><span class="p">),</span> <span class="s2">&quot;files&quot;</span><span class="p">)</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></code></pre></div>
+<h3 id="sync-goproapi">Sync (<code>GoProAPI</code>)<a class="headerlink" href="#sync-goproapi" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">gopro_api.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">GoProAPI</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">gopro_api.api.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CapturedRange</span><span class="p">,</span> <span class="n">GoProMediaSearchParams</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="n">params</span> <span class="o">=</span> <span class="n">GoProMediaSearchParams</span><span class="p">(</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">captured_range</span><span class="o">=</span><span class="n">CapturedRange</span><span class="p">(</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>            <span class="n">start</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s2">&quot;2026-03-01&quot;</span><span class="p">),</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>            <span class="n">end</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="s2">&quot;2026-03-02&quot;</span><span class="p">),</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="p">),</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="n">per_page</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>    <span class="p">)</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    <span class="k">with</span> <span class="n">GoProAPI</span><span class="p">()</span> <span class="k">as</span> <span class="n">api</span><span class="p">:</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>        <span class="n">search</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">search</span><span class="o">.</span><span class="n">embedded</span><span class="o">.</span><span class="n">media</span><span class="p">:</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>            <span class="n">meta</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">meta</span><span class="o">.</span><span class="n">embedded</span><span class="o">.</span><span class="n">files</span><span class="p">),</span> <span class="s2">&quot;files&quot;</span><span class="p">)</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></div>
+<h3 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Requests:</strong> <code>GoProMediaSearchParams</code>, <code>CapturedRange</code>, etc. in <strong><code>gopro_api.api.models</code></strong>.  </li>
 <li><strong>Responses:</strong> search and download JSON shapes (including <code>_embedded</code> / <code>_pages</code> aliases).</li>
 </ul>
 <p>List fields in search params are serialized to comma-separated strings when you call <strong><code>model_dump()</code></strong> (used by the HTTP clients).</p>
-<h2 id="project-layout">Project layout</h2>
+<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1135,15 +1265,51 @@ if __name__ == &quot;__main__&quot;:
 </tr>
 </tbody>
 </table>
-<h2 id="ci-and-releases">CI and releases</h2>
+<h2 id="ci-and-releases">CI and releases<a class="headerlink" href="#ci-and-releases" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/himewel/gopro-api/blob/main/.github/workflows/release.yml"><code>.github/workflows/release.yml</code></a>:</p>
 <ul>
 <li><strong>Push to <code>main</code></strong> — builds wheel + source <code>.zip</code>, uploads <strong>workflow artifacts</strong>.  </li>
 <li><strong>Push tag <code>v*</code></strong> (e.g. <code>v0.0.5</code>) — attaches the same files to a <strong>GitHub Release</strong>.</li>
 </ul>
-<h2 id="license">License</h2>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/himewel/gopro-api/blob/main/LICENSE">MIT License</a>.</p>
 <p>GoPro, Quik, and related marks are trademarks of their respective owners.</p>
+<hr />
+<h2 id="quick-links">Quick links<a class="headerlink" href="#quick-links" title="Permanent link">&para;</a></h2>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m13.13 22.19-1.63-3.83c1.57-.58 3.04-1.36 4.4-2.27zM5.64 12.5l-3.83-1.63 6.1-2.77C7 9.46 6.22 10.93 5.64 12.5M21.61 2.39S16.66.269 11 5.93c-2.19 2.19-3.5 4.6-4.35 6.71-.28.75-.09 1.57.46 2.13l2.13 2.12c.55.56 1.37.74 2.12.46A19.1 19.1 0 0 0 18.07 13c5.66-5.66 3.54-10.61 3.54-10.61m-7.07 7.07c-.78-.78-.78-2.05 0-2.83s2.05-.78 2.83 0c.77.78.78 2.05 0 2.83s-2.05.78-2.83 0m-5.66 7.07-1.41-1.41zM6.24 22l3.64-3.64c-.34-.09-.67-.24-.97-.45L4.83 22zM2 22h1.41l4.77-4.76-1.42-1.41L2 20.59zm0-2.83 4.09-4.08c-.21-.3-.36-.62-.45-.97L2 17.76z"/></svg></span> <strong>Getting Started</strong></p>
+<hr />
+<p>Install the library, set up your token, and make your first request in minutes.</p>
+<p><a href="getting-started/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> Getting Started</a></p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg></span> <strong>CLI Reference</strong></p>
+<hr />
+<p>Full reference for <code>gopro-api search</code>, <code>info</code>, and <code>pull</code> with all flags and examples.</p>
+<p><a href="cli/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> CLI</a></p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64z"/></svg></span> <strong>Configuration</strong></p>
+<hr />
+<p>How to set <code>GP_ACCESS_TOKEN</code> and retrieve the cookie from your browser.</p>
+<p><a href="configuration/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> Configuration</a></p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 5v5H9V5H5v8h4v-1h1v5H9v-3H5v5h7v-2h1v2h6v-2h2v4H3V3h18v12h-2v-5h-6v5h-1V9h7V5z"/></svg></span> <strong>Architecture</strong></p>
+<hr />
+<p>Layer diagrams, data-flow sequences, and a guide for extending the library.</p>
+<p><a href="ARCHITECTURE/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> Architecture</a></p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.6 16.6 4.6-4.6-4.6-4.6L16 6l6 6-6 6zm-5.2 0L4.8 12l4.6-4.6L8 6l-6 6 6 6z"/></svg></span> <strong>API Reference</strong></p>
+<hr />
+<p>Auto-generated docstrings for every public class, method, model, and exception.</p>
+<p><a href="api/api/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> API Reference</a></p>
+</li>
+</ul>
+</div>
 
 
 
