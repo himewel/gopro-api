@@ -41,7 +41,28 @@ extra_css:
   - stylesheets/colorful.css
 
 markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
 
 plugins:
   - search
@@ -53,9 +74,17 @@ plugins:
             docstring_style: google
             show_root_heading: true
             members_order: source
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            merge_init_into_class: true
+            show_signature_annotations: true
 
 nav:
   - Home: index.md
+  - Getting Started: getting-started.md
+  - CLI: cli.md
+  - Configuration: configuration.md
+  - Architecture: ARCHITECTURE.md
   - API Reference:
     - API: api/api.md
     - Client: api/client.md
