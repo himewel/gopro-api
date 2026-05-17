@@ -10,8 +10,22 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
+  auto-label:
+    name: Auto-label PR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: bcoe/conventional-release-labels@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ignored_types: '["chore"]'
+          type_labels: '{"feat":"feature","fix":"fix","perf":"performance","refactor":"refactor","docs":"documentation","test":"test","build":"build","ci":"ci","breaking_change":"breaking change"}'
+
   lint-and-build:
     name: Lint and build
     runs-on: ubuntu-latest
