@@ -2,14 +2,16 @@
 
 from __future__ import annotations
 
+from functools import lru_cache
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     """Application settings from the process environment and optional ``.env`` file.
 
-    Values are read at instantiation; use ``gopro_api.config.settings`` or the
-    ``GP_ACCESS_TOKEN`` alias for the token used by API clients and the CLI.
+    Values are read at instantiation; use :func:`get_settings` for the token used
+    by API clients and the CLI.
 
     Attributes:
         gp_access_token: GoPro cloud cookie value. Environment variable:
@@ -19,12 +21,23 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
+        extra="ignore",
     )
 
     gp_access_token: str | None = None
 
 
-settings = Settings()
+@lru_cache
+def get_settings() -> Settings:
+    """Return the process-wide settings singleton.
 
-# Backward-compatible module-level alias used throughout the package.
-GP_ACCESS_TOKEN = settings.gp_access_token
+    The result is memoized. Call ``get_settings.cache_clear()`` before constructing
+    a new ``Settings`` instance when tests mutate the environment.
+
+    Returns:
+        Parsed :class:`Settings` for the current process.
+    """
+    return Settings()
+
+
+__all__ = ["Settings", "get_settings"]

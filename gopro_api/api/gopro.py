@@ -2,7 +2,7 @@
 
 import requests
 
-from gopro_api.config import GP_ACCESS_TOKEN
+from gopro_api.config import get_settings
 from gopro_api.api.models import (
     GoProMediaDownloadResponse,
     GoProMediaSearchParams,
@@ -15,7 +15,7 @@ class GoProAPI:
 
     Use as a context manager so a ``requests.Session`` is created and closed
     around ``search`` and ``download``. Pass ``access_token`` to override
-    ``gopro_api.config.GP_ACCESS_TOKEN``.
+    :func:`~gopro_api.config.get_settings`.
     """
 
     def __init__(self, access_token: str | None = None, timeout: float = 10.0) -> None:
@@ -23,10 +23,10 @@ class GoProAPI:
 
         Args:
             access_token: ``gp_access_token`` cookie value; defaults to
-                ``gopro_api.config.GP_ACCESS_TOKEN``.
+                :attr:`~gopro_api.config.Settings.gp_access_token` from settings.
             timeout: Per-request timeout in seconds passed to ``requests``.
         """
-        self.access_token = access_token or GP_ACCESS_TOKEN
+        self.access_token = access_token or get_settings().gp_access_token
         self._timeout = timeout
         self._session: requests.Session | None = None
 

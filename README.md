@@ -83,7 +83,7 @@ python -m gopro_api.cli pull MEDIA_ID ./out --height 720
 
 ## Configuration
 
-`gopro_api.config` reads settings from the environment and from a `.env` file in the current working directory via **pydantic-settings**. The only required setting is **`GP_ACCESS_TOKEN`**.
+`gopro_api.config` reads settings from the environment and from a `.env` file in the current working directory via **pydantic-settings**. Use `get_settings()` to access the memoized singleton; the only required setting is **`GP_ACCESS_TOKEN`**.
 
 Example `.env`:
 
@@ -201,7 +201,7 @@ List fields in search params are serialized to comma-separated strings when you 
 | `gopro_api/api/async_gopro.py` | `AsyncGoProAPI` — async `search`, `download` |
 | `gopro_api/api/models.py` | Pydantic request/response models |
 | `gopro_api/api/__init__.py` | Re-exports `GoProAPI`, `AsyncGoProAPI` |
-| `gopro_api/config.py` | pydantic-settings `Settings`, `GP_ACCESS_TOKEN` |
+| `gopro_api/config.py` | pydantic-settings `Settings`, lazy `get_settings()` |
 | `gopro_api/cli/` | `gopro-api` CLI |
 | `setup.py` | Package metadata, dependencies, console entry point |
 

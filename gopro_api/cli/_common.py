@@ -8,7 +8,7 @@ from typing import Optional
 import typer
 from rich.table import Table
 
-from gopro_api.config import GP_ACCESS_TOKEN
+from gopro_api.config import get_settings
 
 _FIELD_LABELS: dict[str, str] = {
     "type": "media",
@@ -36,7 +36,7 @@ def _require_token() -> None:
     Raises:
         typer.Exit: With code ``2`` if the token is missing.
     """
-    if not GP_ACCESS_TOKEN:
+    if not get_settings().gp_access_token:
         typer.secho(
             "error: GP_ACCESS_TOKEN is not set. "
             "Add it to your environment or a .env file.",
