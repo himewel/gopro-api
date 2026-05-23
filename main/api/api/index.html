@@ -1127,7 +1127,7 @@
         <p>Synchronous client for <code>https://api.gopro.com</code> (Quik / cloud library).</p>
 <p>Use as a context manager so a <code>requests.Session</code> is created and closed
 around <code>search</code> and <code>download</code>. Pass <code>access_token</code> to override
-<code>gopro_api.config.GP_ACCESS_TOKEN</code>.</p>
+:func:<code>~gopro_api.config.get_settings</code>.</p>
 
         <p>Create a sync client.</p>
 
@@ -1153,7 +1153,7 @@ around <code>search</code> and <code>download</code>. Pass <code>access_token</c
             <td>
               <div class="doc-md-description">
                 <p><code>gp_access_token</code> cookie value; defaults to
-<code>gopro_api.config.GP_ACCESS_TOKEN</code>.</p>
+:attr:<code>~gopro_api.config.Settings.gp_access_token</code> from settings.</p>
               </div>
             </td>
             <td>
@@ -1203,10 +1203,10 @@ around <code>search</code> and <code>download</code>. Pass <code>access_token</c
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="sd">    Args:</span>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">        access_token: ``gp_access_token`` cookie value; defaults to</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">            ``gopro_api.config.GP_ACCESS_TOKEN``.</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">            :attr:`~gopro_api.config.Settings.gp_access_token` from settings.</span>
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">        timeout: Per-request timeout in seconds passed to ``requests``.</span>
 </span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">access_token</span> <span class="ow">or</span> <span class="n">GP_ACCESS_TOKEN</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">access_token</span> <span class="ow">or</span> <span class="n">get_settings</span><span class="p">()</span><span class="o">.</span><span class="n">gp_access_token</span>
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span> <span class="o">=</span> <span class="n">timeout</span>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">:</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span></code></pre></div></td></tr></table></div>
@@ -1877,7 +1877,7 @@ string after serialization.</p>
         <p>Async client for <code>https://api.gopro.com</code> (Quik / cloud library).</p>
 <p>Use as an async context manager so an <code>aiohttp.ClientSession</code> is opened
 and closed around <code>search</code> and <code>download</code>. Pass <code>access_token</code> to
-override <code>gopro_api.config.GP_ACCESS_TOKEN</code>.</p>
+override :func:<code>~gopro_api.config.get_settings</code>.</p>
 
         <p>Create an async client.</p>
 
@@ -1903,7 +1903,7 @@ override <code>gopro_api.config.GP_ACCESS_TOKEN</code>.</p>
             <td>
               <div class="doc-md-description">
                 <p><code>gp_access_token</code> cookie value; defaults to
-<code>gopro_api.config.GP_ACCESS_TOKEN</code>.</p>
+:attr:<code>~gopro_api.config.Settings.gp_access_token</code> from settings.</p>
               </div>
             </td>
             <td>
@@ -1953,10 +1953,10 @@ override <code>gopro_api.config.GP_ACCESS_TOKEN</code>.</p>
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>
 </span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="sd">    Args:</span>
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="sd">        access_token: ``gp_access_token`` cookie value; defaults to</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">            ``gopro_api.config.GP_ACCESS_TOKEN``.</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="sd">            :attr:`~gopro_api.config.Settings.gp_access_token` from settings.</span>
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="sd">        timeout: Total client timeout in seconds for ``aiohttp``.</span>
 </span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">access_token</span> <span class="ow">or</span> <span class="n">GP_ACCESS_TOKEN</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">access_token</span> <span class="o">=</span> <span class="n">access_token</span> <span class="ow">or</span> <span class="n">get_settings</span><span class="p">()</span><span class="o">.</span><span class="n">gp_access_token</span>
 </span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientTimeout</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
 </span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">:</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 </span></code></pre></div></td></tr></table></div>
