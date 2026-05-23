@@ -24,7 +24,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ignored_types: '["chore"]'
-          type_labels: '{"feat":"feature","fix":"fix","perf":"performance","refactor":"refactor","docs":"documentation","test":"test","build":"build","ci":"ci","breaking_change":"breaking change"}'
+          type_labels: '{"feat":"feature","fix":"fix","perf":"performance","refactor":"refactor","docs":"documentation","test":"test","build":"build","ci":"ci","breaking":"breaking change"}'
 
   lint-and-build:
     name: Lint and build

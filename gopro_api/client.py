@@ -52,7 +52,7 @@ class GoProClient:
 
         Args:
             access_token: ``gp_access_token`` cookie value; defaults to
-                ``gopro_api.config.GP_ACCESS_TOKEN``.
+                :func:`~gopro_api.config.get_settings`.
             timeout: Per-request HTTP timeout in seconds (API and CDN fetches).
             page_size: Default page size for ``iter_nonempty_search_pages``.
             max_items: Maximum rows returned by ``list_media_items``.
@@ -256,7 +256,7 @@ class AsyncGoProClient:
 
         Args:
             access_token: ``gp_access_token`` cookie value; defaults to
-                ``gopro_api.config.GP_ACCESS_TOKEN``.
+                :func:`~gopro_api.config.get_settings`.
             timeout: Total ``aiohttp`` client timeout in seconds.
             page_size: Default page size for ``iter_nonempty_search_pages``.
             max_items: Maximum rows returned by ``list_media_items``.
