@@ -102,7 +102,9 @@ class AuthPrinter:
             "token_configured": _yes_no(status.token_configured),
             "token_source": status.token_source or "",
             "authenticated": self._authenticated_label(status),
-            "http_status": "" if status.http_status is None else str(status.http_status),
+            "http_status": (
+                "" if status.http_status is None else str(status.http_status)
+            ),
             "message": status.message,
         }
         console = Console(soft_wrap=True, highlight=False, markup=False)

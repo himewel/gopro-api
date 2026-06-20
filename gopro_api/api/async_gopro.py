@@ -179,7 +179,9 @@ class AsyncGoProAPI:
             message="GP_ACCESS_TOKEN is not set.",
         )
 
-    def _auth_status_from_http(self, *, status_code: int, source: str) -> GoProAuthStatus:
+    def _auth_status_from_http(
+        self, *, status_code: int, source: str
+    ) -> GoProAuthStatus:
         """Build a status result from an HTTP verification response.
 
         Args:
