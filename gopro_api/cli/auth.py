@@ -5,11 +5,12 @@ from __future__ import annotations
 import asyncio
 import json
 import sys
+from collections.abc import Iterator
+from contextlib import contextmanager
 
 import typer
 from rich.console import Console
 from rich.panel import Panel
-from rich.status import Status
 from rich.table import Table
 from rich import box
 
@@ -31,20 +32,14 @@ class AuthPrinter:
                 created when ``None``.
         """
         self._console = console or Console(soft_wrap=True)
-        self._active_status: Status | None = None
 
-    def start_stage(self) -> None:
+    @contextmanager
+    def verifying_status(self) -> Iterator[None]:
         """Show a spinner while the API verification request runs."""
-        self._active_status = self._console.status(
+        with self._console.status(
             "⏳ [bold cyan]Verifying access token…[/bold cyan]",
-        )
-        self._active_status.__enter__()
-
-    def stop_stage(self) -> None:
-        """Stop the active spinner, if any."""
-        if self._active_status is not None:
-            self._active_status.__exit__(None, None, None)
-            self._active_status = None
+        ):
+            yield
 
     def _authenticated_label(self, status: GoProAuthStatus) -> str:
         """Format the authenticated field for display.
@@ -151,13 +146,13 @@ async def _run_auth(
         tsv: When ``True``, emit tab-separated values instead of a Rich panel.
     """
     printer = AuthPrinter()
-    if not json_out and not tsv:
-        printer.start_stage()
-    try:
+    if json_out or tsv:
         async with AsyncGoProClient(timeout=timeout) as client:
             status = await client.check_auth()
-    finally:
-        printer.stop_stage()
+    else:
+        with printer.verifying_status():
+            async with AsyncGoProClient(timeout=timeout) as client:
+                status = await client.check_auth()
 
     if json_out:
         printer.print_json(status)

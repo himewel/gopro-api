@@ -2,7 +2,8 @@
 
 import aiohttp
 
-from gopro_api.config import get_settings, get_token_info
+from gopro_api.config import get_settings
+from gopro_api.api.auth_status import AuthCheckRequest, AuthStatusResolver
 from gopro_api.api.models import (
     GoProAuthStatus,
     GoProMediaSearchParams,
@@ -152,69 +153,6 @@ class AsyncGoProAPI:
             body = await response.text()
         return GoProMediaSearchResponse.model_validate_json(body)
 
-    def _token_source(self) -> str | None:
-        """Return where the active access token was loaded from.
-
-        Returns:
-            ``"argument"``, ``"environment"``, ``".env"``, or ``None`` when unset.
-        """
-        if not self.access_token:
-            return None
-        if self._explicit_token:
-            return "argument"
-        _, source = get_token_info()
-        return source
-
-    def _auth_status_without_request(self) -> GoProAuthStatus:
-        """Build a status result when no token is configured.
-
-        Returns:
-            Status indicating the token is missing.
-        """
-        return GoProAuthStatus(
-            token_configured=False,
-            token_source=None,
-            authenticated=None,
-            http_status=None,
-            message="GP_ACCESS_TOKEN is not set.",
-        )
-
-    def _auth_status_from_http(
-        self, *, status_code: int, source: str
-    ) -> GoProAuthStatus:
-        """Build a status result from an HTTP verification response.
-
-        Args:
-            status_code: HTTP status returned by ``GET /media/search``.
-            source: Token source label from :meth:`_token_source`.
-
-        Returns:
-            Parsed authentication status for the caller.
-        """
-        if status_code == 200:
-            return GoProAuthStatus(
-                token_configured=True,
-                token_source=source,
-                authenticated=True,
-                http_status=status_code,
-                message="Access token is valid.",
-            )
-        if status_code == 401:
-            return GoProAuthStatus(
-                token_configured=True,
-                token_source=source,
-                authenticated=False,
-                http_status=status_code,
-                message="Access token was rejected (expired or invalid).",
-            )
-        return GoProAuthStatus(
-            token_configured=True,
-            token_source=source,
-            authenticated=False,
-            http_status=status_code,
-            message=f"Unexpected HTTP status {status_code}.",
-        )
-
     async def check_auth(self) -> GoProAuthStatus:
         """Verify that the configured access token is accepted by the API.
 
@@ -226,30 +164,20 @@ class AsyncGoProAPI:
         Raises:
             RuntimeError: If used outside ``async with AsyncGoProAPI() as api``.
         """
-        if not self.access_token:
-            return self._auth_status_without_request()
 
-        headers = self.get_headers(
-            "application/vnd.gopro.jk.media.search+json; version=2.0.0",
-        )
-        params = GoProMediaSearchParams(per_page=1, page=1)
-        session = self._session_or_raise()
-        source = self._token_source()
-        try:
+        async def perform_request(prepared: AuthCheckRequest) -> int:
+            session = self._session_or_raise()
             async with session.get(
                 "/media/search",
-                headers=headers,
-                params=params.model_dump(),
+                headers=prepared.headers,
+                params=prepared.params,
             ) as response:
-                return self._auth_status_from_http(
-                    status_code=response.status,
-                    source=source or "argument",
-                )
-        except aiohttp.ClientError as exc:
-            return GoProAuthStatus(
-                token_configured=True,
-                token_source=source,
-                authenticated=False,
-                http_status=None,
-                message=f"Request failed: {exc}",
-            )
+                return response.status
+
+        return await AuthStatusResolver.verify_async(
+            access_token=self.access_token,
+            explicit_token=self._explicit_token,
+            get_headers=self.get_headers,
+            perform_request=perform_request,
+            request_error_type=aiohttp.ClientError,
+        )
