@@ -1071,7 +1071,7 @@
 <li><strong><code>GoProAPI</code></strong> — synchronous client (<code>requests</code>), <code>with</code> context manager  </li>
 <li><strong><code>AsyncGoProAPI</code></strong> — async client (<code>aiohttp</code>), <code>async with</code> context manager  </li>
 <li><strong>Pydantic</strong> request/response types in <code>gopro_api.api.models</code>  </li>
-<li><strong>CLI</strong> — <code>gopro-api search</code>, <code>gopro-api info</code>, <code>gopro-api pull</code>  </li>
+<li><strong>CLI</strong> — <code>gopro-api search</code>, <code>gopro-api info</code>, <code>gopro-api pull</code>, <code>gopro-api auth</code>  </li>
 <li><strong><code>GP_ACCESS_TOKEN</code></strong> from environment / <code>.env</code> (browser cookie value)</li>
 </ul>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
@@ -1104,6 +1104,8 @@
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>gopro-api<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./downloads
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>gopro-api<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./downloads<span class="w"> </span>--height<span class="w"> </span><span class="m">1080</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>gopro-api<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./downloads<span class="w"> </span>--width<span class="w"> </span><span class="m">1920</span><span class="w"> </span>--height<span class="w"> </span><span class="m">1080</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>gopro-api<span class="w"> </span>auth
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>gopro-api<span class="w"> </span>auth<span class="w"> </span>--json
 </span></code></pre></div>
 <table>
 <thead>
@@ -1125,6 +1127,10 @@
 <td><strong><code>pull</code></strong></td>
 <td>Download asset(s) for a media id into <strong><code>destination</code></strong> (directory; created if missing). Videos (<code>.mp4</code> extension, case-insensitive): one <strong><code>variations</code></strong> entry — <strong>tallest</strong> by default, or closest to <strong><code>--height</code></strong> / <strong><code>--width</code></strong> (sum of squared pixel deltas; ties broken by larger resolution). Photos: uses <strong><code>files</code></strong> (one request per file).</td>
 </tr>
+<tr>
+<td><strong><code>auth</code></strong></td>
+<td>Verify that <strong><code>GP_ACCESS_TOKEN</code></strong> is configured and accepted by the API. Default: Rich panel; <strong><code>--json</code></strong> / <strong><code>--tsv</code></strong> for scripting. Exit code <strong><code>0</code></strong> when authenticated, <strong><code>2</code></strong> when the token is missing, <strong><code>1</code></strong> otherwise.</td>
+</tr>
 </tbody>
 </table>
 <p>Global <strong><code>--timeout</code></strong> (seconds, default <strong><code>60</code></strong>) applies to API calls and to <strong><code>pull</code></strong> CDN downloads (<code>requests.get</code>).</p>
@@ -1133,6 +1139,7 @@
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>info<span class="w"> </span>MEDIA_ID
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./out
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>pull<span class="w"> </span>MEDIA_ID<span class="w"> </span>./out<span class="w"> </span>--height<span class="w"> </span><span class="m">720</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>python<span class="w"> </span>-m<span class="w"> </span>gopro_api.cli<span class="w"> </span>auth
 </span></code></pre></div>
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
 <p><code>gopro_api.config</code> reads settings from the environment and from a <code>.env</code> file in the current working directory via <strong>pydantic-settings</strong>. Use <code>get_settings()</code> to access the memoized singleton; the only required setting is <strong><code>GP_ACCESS_TOKEN</code></strong>.</p>
@@ -1287,7 +1294,7 @@
 <li>
 <p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"/></svg></span> <strong>CLI Reference</strong></p>
 <hr />
-<p>Full reference for <code>gopro-api search</code>, <code>info</code>, and <code>pull</code> with all flags and examples.</p>
+<p>Full reference for <code>gopro-api search</code>, <code>info</code>, <code>pull</code>, and <code>auth</code> with all flags and examples.</p>
 <p><a href="cli/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span> CLI</a></p>
 </li>
 <li>

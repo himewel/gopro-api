@@ -543,6 +543,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#data-flow-gopro-api-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flow — gopro-api auth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -940,6 +951,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#data-flow-gopro-api-auth" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flow — gopro-api auth
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1038,7 +1060,7 @@
 </tr>
 <tr>
 <td><code>gopro_api/cli/</code></td>
-<td>Typer application — <code>search</code>, <code>info</code>, <code>pull</code> commands</td>
+<td>Typer application — <code>search</code>, <code>info</code>, <code>pull</code>, <code>auth</code> commands</td>
 </tr>
 </tbody>
 </table>
@@ -1068,7 +1090,7 @@
 <p>All request parameters and API responses are typed with <a href="https://docs.pydantic.dev/">Pydantic v2</a> models:</p>
 <ul>
 <li><strong>Requests</strong> — <code>GoProMediaSearchParams</code>, <code>CapturedRange</code>.</li>
-<li><strong>Responses</strong> — <code>GoProMediaSearchResponse</code>, <code>GoProMediaDownloadResponse</code>, and their <code>_embedded</code> / <code>_pages</code> children (with field aliases for the GoPro API's underscore-prefixed keys).</li>
+<li><strong>Responses</strong> — <code>GoProMediaSearchResponse</code>, <code>GoProMediaDownloadResponse</code>, <code>GoProAuthStatus</code>, and their <code>_embedded</code> / <code>_pages</code> children (with field aliases for the GoPro API's underscore-prefixed keys).</li>
 </ul>
 <p>List fields in request models are serialised to comma-separated strings automatically when calling <code>model_dump()</code>.</p>
 <h3 id="4-configuration-gopro_apiconfig">4. Configuration (<code>gopro_api.config</code>)<a class="headerlink" href="#4-configuration-gopro_apiconfig" title="Permanent link">&para;</a></h3>
@@ -1078,6 +1100,7 @@
 <li>A <code>.env</code> file in the current working directory.</li>
 </ol>
 <p>Clients accept an explicit <code>access_token</code> parameter that overrides <code>Settings</code>.</p>
+<p><code>get_token_info()</code> reports whether a token is configured and whether it came from the environment or a <code>.env</code> file.</p>
 <h3 id="5-cli-gopro_apicli">5. CLI (<code>gopro_api.cli</code>)<a class="headerlink" href="#5-cli-gopro_apicli" title="Permanent link">&para;</a></h3>
 <p>The CLI is built with <a href="https://typer.tiangolo.com/">Typer</a> and <a href="https://github.com/Textualize/rich">Rich</a>:</p>
 <ul>
@@ -1085,6 +1108,7 @@
 <li><code>gopro_api/cli/search.py</code> — <code>search</code> command + <code>SearchPrinter</code>.</li>
 <li><code>gopro_api/cli/info.py</code> — <code>info</code> command + <code>InfoPrinter</code>.</li>
 <li><code>gopro_api/cli/pull.py</code> — <code>pull</code> command + <code>PullPrinter</code>.</li>
+<li><code>gopro_api/cli/auth.py</code> — <code>auth</code> command + <code>AuthPrinter</code>.</li>
 <li><code>gopro_api/cli/_common.py</code> — shared helpers.</li>
 </ul>
 <p>Each command delegates to <code>GoProClient</code>/<code>AsyncGoProClient</code> and passes the result to a dedicated <code>*Printer</code> class for Rich-formatted output.</p>
@@ -1104,6 +1128,22 @@
     GoProAPI--&gt;&gt;GoProClient: GoProMediaSearchResponse (Pydantic)
     GoProClient--&gt;&gt;CLI: response
     CLI-&gt;&gt;User: Rich table or raw JSON (stdout)</code></pre>
+<h2 id="data-flow-gopro-api-auth">Data flow — <code>gopro-api auth</code><a class="headerlink" href="#data-flow-gopro-api-auth" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+    actor User
+    participant CLI
+    participant AsyncGoProClient
+    participant AsyncGoProAPI
+    participant GoproCom as api.gopro.com
+
+    User-&gt;&gt;CLI: gopro-api auth
+    CLI-&gt;&gt;AsyncGoProClient: check_auth()
+    AsyncGoProClient-&gt;&gt;AsyncGoProAPI: check_auth()
+    AsyncGoProAPI-&gt;&gt;GoproCom: GET /media/search?per_page=1
+    GoproCom--&gt;&gt;AsyncGoProAPI: HTTP 200 or 401
+    AsyncGoProAPI--&gt;&gt;AsyncGoProClient: GoProAuthStatus
+    AsyncGoProClient--&gt;&gt;CLI: GoProAuthStatus
+    CLI-&gt;&gt;User: Rich panel or JSON (stdout)</code></pre>
 <h2 id="error-handling">Error handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>classDiagram
     Exception &lt;|-- GoProAPIError
