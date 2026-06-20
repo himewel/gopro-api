@@ -18,7 +18,7 @@
 
     ---
 
-    Full reference for `gopro-api search`, `info`, and `pull` with all flags and examples.
+    Full reference for `gopro-api search`, `info`, `pull`, and `auth` with all flags and examples.
 
     [:octicons-arrow-right-24: CLI](cli.md)
 

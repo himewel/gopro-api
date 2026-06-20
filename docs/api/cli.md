@@ -20,6 +20,8 @@ Built with [Typer](https://typer.tiangolo.com/); the Typer application is expose
 
 ::: gopro_api.cli.pull_command
 
+::: gopro_api.cli.auth_command
+
 ## Printers
 
 ::: gopro_api.cli.search.SearchPrinter
@@ -27,3 +29,5 @@ Built with [Typer](https://typer.tiangolo.com/); the Typer application is expose
 ::: gopro_api.cli.info.InfoPrinter
 
 ::: gopro_api.cli.pull.PullPrinter
+
+::: gopro_api.cli.auth.AuthPrinter

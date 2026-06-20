@@ -62,6 +62,13 @@ Sign in to [gopro.com](https://gopro.com) or [quik.gopro.com](https://quik.gopro
 
 Tokens expire. If you receive a **401 Unauthorized** error, return to your browser and copy a fresh token value.
 
+Check whether your current token is still valid:
+
+```bash
+gopro-api auth
+gopro-api auth --json
+```
+
 ## API reference
 
 See [`gopro_api.config`](api/utils.md) for the `Settings` class that loads these values.

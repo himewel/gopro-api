@@ -27,3 +27,7 @@ Pydantic models for GoPro cloud media search and download responses.
 ::: gopro_api.api.models.GoProMediaDownloadFile
 
 ::: gopro_api.api.models.GoProMediaDownloadSidecarFile
+
+## Auth
+
+::: gopro_api.api.models.GoProAuthStatus
