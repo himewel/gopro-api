@@ -289,3 +289,23 @@ class GoProMediaDownloadResponse(BaseModel):
 
     filename: str
     embedded: GoProMediaDownloadEmbedded = Field(alias="_embedded")
+
+
+class GoProAuthStatus(BaseModel):
+    """Result of verifying ``GP_ACCESS_TOKEN`` against the GoPro cloud API.
+
+    Attributes:
+        token_configured: Whether a non-empty access token is available.
+        token_source: Where the token came from (``environment``, ``.env``,
+            ``argument``), or ``None`` when not configured.
+        authenticated: ``True`` when the API accepted the token, ``False`` when
+            rejected or the request failed, ``None`` when no token was configured.
+        http_status: HTTP status from the verification request, if one was made.
+        message: Human-readable summary suitable for CLI or logs.
+    """
+
+    token_configured: bool
+    token_source: str | None = None
+    authenticated: bool | None = None
+    http_status: int | None = None
+    message: str

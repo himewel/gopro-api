@@ -7,5 +7,13 @@ from .app import app, main
 from .search import search_command
 from .info import info_command
 from .pull import pull_command
+from .auth import auth_command
 
-__all__ = ["app", "main", "search_command", "info_command", "pull_command"]
+__all__ = [
+    "app",
+    "main",
+    "search_command",
+    "info_command",
+    "pull_command",
+    "auth_command",
+]

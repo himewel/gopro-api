@@ -2,8 +2,9 @@
 
 import aiohttp
 
-from gopro_api.config import get_settings
+from gopro_api.config import get_settings, get_token_info
 from gopro_api.api.models import (
+    GoProAuthStatus,
     GoProMediaSearchParams,
     GoProMediaDownloadResponse,
     GoProMediaSearchResponse,
@@ -26,6 +27,7 @@ class AsyncGoProAPI:
                 :attr:`~gopro_api.config.Settings.gp_access_token` from settings.
             timeout: Total client timeout in seconds for ``aiohttp``.
         """
+        self._explicit_token = access_token is not None
         self.access_token = access_token or get_settings().gp_access_token
         self._timeout = aiohttp.ClientTimeout(total=timeout)
         self._session: aiohttp.ClientSession | None = None
@@ -149,3 +151,103 @@ class AsyncGoProAPI:
             response.raise_for_status()
             body = await response.text()
         return GoProMediaSearchResponse.model_validate_json(body)
+
+    def _token_source(self) -> str | None:
+        """Return where the active access token was loaded from.
+
+        Returns:
+            ``"argument"``, ``"environment"``, ``".env"``, or ``None`` when unset.
+        """
+        if not self.access_token:
+            return None
+        if self._explicit_token:
+            return "argument"
+        _, source = get_token_info()
+        return source
+
+    def _auth_status_without_request(self) -> GoProAuthStatus:
+        """Build a status result when no token is configured.
+
+        Returns:
+            Status indicating the token is missing.
+        """
+        return GoProAuthStatus(
+            token_configured=False,
+            token_source=None,
+            authenticated=None,
+            http_status=None,
+            message="GP_ACCESS_TOKEN is not set.",
+        )
+
+    def _auth_status_from_http(self, *, status_code: int, source: str) -> GoProAuthStatus:
+        """Build a status result from an HTTP verification response.
+
+        Args:
+            status_code: HTTP status returned by ``GET /media/search``.
+            source: Token source label from :meth:`_token_source`.
+
+        Returns:
+            Parsed authentication status for the caller.
+        """
+        if status_code == 200:
+            return GoProAuthStatus(
+                token_configured=True,
+                token_source=source,
+                authenticated=True,
+                http_status=status_code,
+                message="Access token is valid.",
+            )
+        if status_code == 401:
+            return GoProAuthStatus(
+                token_configured=True,
+                token_source=source,
+                authenticated=False,
+                http_status=status_code,
+                message="Access token was rejected (expired or invalid).",
+            )
+        return GoProAuthStatus(
+            token_configured=True,
+            token_source=source,
+            authenticated=False,
+            http_status=status_code,
+            message=f"Unexpected HTTP status {status_code}.",
+        )
+
+    async def check_auth(self) -> GoProAuthStatus:
+        """Verify that the configured access token is accepted by the API.
+
+        Performs a lightweight ``GET /media/search`` request with ``per_page=1``.
+
+        Returns:
+            Structured authentication status; never raises for HTTP failures.
+
+        Raises:
+            RuntimeError: If used outside ``async with AsyncGoProAPI() as api``.
+        """
+        if not self.access_token:
+            return self._auth_status_without_request()
+
+        headers = self.get_headers(
+            "application/vnd.gopro.jk.media.search+json; version=2.0.0",
+        )
+        params = GoProMediaSearchParams(per_page=1, page=1)
+        session = self._session_or_raise()
+        source = self._token_source()
+        try:
+            async with session.get(
+                "/media/search",
+                headers=headers,
+                params=params.model_dump(),
+            ) as response:
+                return self._auth_status_from_http(
+                    status_code=response.status,
+                    source=source or "argument",
+                )
+        except aiohttp.ClientError as exc:
+            return GoProAuthStatus(
+                token_configured=True,
+                token_source=source,
+                authenticated=False,
+                http_status=None,
+                message=f"Request failed: {exc}",
+            )
