@@ -16,7 +16,7 @@ This project is not affiliated with or endorsed by GoPro.
 - **`GoProAPI`** — synchronous client (`requests`), `with` context manager  
 - **`AsyncGoProAPI`** — async client (`aiohttp`), `async with` context manager  
 - **Pydantic** request/response types in `gopro_api.api.models`  
-- **CLI** — `gopro-api search`, `gopro-api info`, `gopro-api pull`  
+- **CLI** — `gopro-api search`, `gopro-api info`, `gopro-api pull`, `gopro-api auth`  
 - **`GP_ACCESS_TOKEN`** from environment / `.env` (browser cookie value)
 
 ## Requirements
@@ -62,6 +62,8 @@ gopro-api info MEDIA_ID --json
 gopro-api pull MEDIA_ID ./downloads
 gopro-api pull MEDIA_ID ./downloads --height 1080
 gopro-api pull MEDIA_ID ./downloads --width 1920 --height 1080
+gopro-api auth
+gopro-api auth --json
 ```
 
 | Command | Purpose |
@@ -69,6 +71,7 @@ gopro-api pull MEDIA_ID ./downloads --width 1920 --height 1080
 | **`search`** | List media in a capture range. Default: a **`# _pages`** summary line, a tab-separated header (`id`, `type`, `captured_at`, `filename`, …; not `gopro_user_id` / `source_gumi` / `source_mgumi`), then one row per item (other API fields in an **`extra`** JSON column). **`--json`**: full API-shaped response; with **`--all-pages`**, a JSON array of every page. |
 | **`info`** | Show download metadata for one media id (filename + file lines with size and URL), or **`--json`** for the full payload. |
 | **`pull`** | Download asset(s) for a media id into **`destination`** (directory; created if missing). Videos (`.mp4` extension, case-insensitive): one **`variations`** entry — **tallest** by default, or closest to **`--height`** / **`--width`** (sum of squared pixel deltas; ties broken by larger resolution). Photos: uses **`files`** (one request per file). |
+| **`auth`** | Verify that **`GP_ACCESS_TOKEN`** is configured and accepted by the API. Default: Rich panel; **`--json`** / **`--tsv`** for scripting. Exit code **`0`** when authenticated, **`2`** when the token is missing, **`1`** otherwise. |
 
 Global **`--timeout`** (seconds, default **`60`**) applies to API calls and to **`pull`** CDN downloads (`requests.get`).
 
@@ -79,6 +82,7 @@ python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-02
 python -m gopro_api.cli info MEDIA_ID
 python -m gopro_api.cli pull MEDIA_ID ./out
 python -m gopro_api.cli pull MEDIA_ID ./out --height 720
+python -m gopro_api.cli auth
 ```
 
 ## Configuration

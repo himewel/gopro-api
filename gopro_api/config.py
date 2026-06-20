@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -40,4 +41,19 @@ def get_settings() -> Settings:
     return Settings()
 
 
-__all__ = ["Settings", "get_settings"]
+def get_token_info() -> tuple[bool, str | None]:
+    """Report whether ``GP_ACCESS_TOKEN`` is available and where it came from.
+
+    Returns:
+        A pair ``(configured, source)`` where ``source`` is ``"environment"``,
+        ``".env"``, or ``None`` when not configured.
+    """
+    token = get_settings().gp_access_token
+    if not token:
+        return False, None
+    if os.environ.get("GP_ACCESS_TOKEN"):
+        return True, "environment"
+    return True, ".env"
+
+
+__all__ = ["Settings", "get_settings", "get_token_info"]

@@ -3,7 +3,9 @@
 import aiohttp
 
 from gopro_api.config import get_settings
+from gopro_api.api.auth_status import AuthCheckRequest, AuthStatusResolver
 from gopro_api.api.models import (
+    GoProAuthStatus,
     GoProMediaSearchParams,
     GoProMediaDownloadResponse,
     GoProMediaSearchResponse,
@@ -26,6 +28,7 @@ class AsyncGoProAPI:
                 :attr:`~gopro_api.config.Settings.gp_access_token` from settings.
             timeout: Total client timeout in seconds for ``aiohttp``.
         """
+        self._explicit_token = access_token is not None
         self.access_token = access_token or get_settings().gp_access_token
         self._timeout = aiohttp.ClientTimeout(total=timeout)
         self._session: aiohttp.ClientSession | None = None
@@ -149,3 +152,32 @@ class AsyncGoProAPI:
             response.raise_for_status()
             body = await response.text()
         return GoProMediaSearchResponse.model_validate_json(body)
+
+    async def check_auth(self) -> GoProAuthStatus:
+        """Verify that the configured access token is accepted by the API.
+
+        Performs a lightweight ``GET /media/search`` request with ``per_page=1``.
+
+        Returns:
+            Structured authentication status; never raises for HTTP failures.
+
+        Raises:
+            RuntimeError: If used outside ``async with AsyncGoProAPI() as api``.
+        """
+
+        async def perform_request(prepared: AuthCheckRequest) -> int:
+            session = self._session_or_raise()
+            async with session.get(
+                "/media/search",
+                headers=prepared.headers,
+                params=prepared.params,
+            ) as response:
+                return response.status
+
+        return await AuthStatusResolver.verify_async(
+            access_token=self.access_token,
+            explicit_token=self._explicit_token,
+            get_headers=self.get_headers,
+            perform_request=perform_request,
+            request_error_type=aiohttp.ClientError,
+        )

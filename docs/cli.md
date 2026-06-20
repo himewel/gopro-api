@@ -117,6 +117,42 @@ gopro-api pull MEDIA_ID ./downloads --height 1080
 gopro-api pull MEDIA_ID ./downloads --width 1920 --height 1080
 ```
 
+---
+
+### `auth`
+
+Verify that `GP_ACCESS_TOKEN` is configured and accepted by the GoPro cloud API.
+
+```bash
+gopro-api auth
+```
+
+**Options**
+
+| Option | Description |
+|--------|-------------|
+| `--json` | Print structured JSON instead of the Rich panel. |
+| `--tsv` | Print tab-separated key/value rows for scripting. |
+
+**Default output** — a Rich panel showing whether the token is configured, where it came from (`environment`, `.env`, or an explicit client argument), whether the API accepted it, and a short message.
+
+**Exit codes**
+
+| Code | Meaning |
+|------|---------|
+| `0` | Token configured and authenticated. |
+| `1` | Token present but rejected or the verification request failed. |
+| `2` | `GP_ACCESS_TOKEN` is not set. |
+
+```bash
+# Rich panel (default)
+gopro-api auth
+
+# Scripting
+gopro-api auth --json
+gopro-api auth --tsv
+```
+
 ## Running without an installed entry point
 
 ```bash
@@ -124,6 +160,7 @@ python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-02
 python -m gopro_api.cli info MEDIA_ID
 python -m gopro_api.cli pull MEDIA_ID ./out
 python -m gopro_api.cli pull MEDIA_ID ./out --height 720
+python -m gopro_api.cli auth
 ```
 
 ## API reference

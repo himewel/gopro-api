@@ -3,7 +3,9 @@
 import requests
 
 from gopro_api.config import get_settings
+from gopro_api.api.auth_status import AuthCheckRequest, AuthStatusResolver
 from gopro_api.api.models import (
+    GoProAuthStatus,
     GoProMediaDownloadResponse,
     GoProMediaSearchParams,
     GoProMediaSearchResponse,
@@ -26,6 +28,7 @@ class GoProAPI:
                 :attr:`~gopro_api.config.Settings.gp_access_token` from settings.
             timeout: Per-request timeout in seconds passed to ``requests``.
         """
+        self._explicit_token = access_token is not None
         self.access_token = access_token or get_settings().gp_access_token
         self._timeout = timeout
         self._session: requests.Session | None = None
@@ -142,3 +145,33 @@ class GoProAPI:
         )
         response.raise_for_status()
         return GoProMediaSearchResponse.model_validate_json(response.text)
+
+    def check_auth(self) -> GoProAuthStatus:
+        """Verify that the configured access token is accepted by the API.
+
+        Performs a lightweight ``GET /media/search`` request with ``per_page=1``.
+
+        Returns:
+            Structured authentication status; never raises for HTTP failures.
+
+        Raises:
+            RuntimeError: If used outside ``with GoProAPI() as api``.
+        """
+
+        def perform_request(prepared: AuthCheckRequest) -> int:
+            session = self._session_or_raise()
+            response = session.get(
+                f"{self.base_url}/media/search",
+                headers=prepared.headers,
+                params=prepared.params,
+                timeout=self._timeout,
+            )
+            return response.status_code
+
+        return AuthStatusResolver.verify_sync(
+            access_token=self.access_token,
+            explicit_token=self._explicit_token,
+            get_headers=self.get_headers,
+            perform_request=perform_request,
+            request_error_type=requests.RequestException,
+        )

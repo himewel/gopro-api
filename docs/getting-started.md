@@ -43,6 +43,12 @@ GP_ACCESS_TOKEN=your_token_here
 
 The library loads it automatically via **pydantic-settings**. See [Configuration](configuration.md) for how to retrieve the token from your browser.
 
+Verify the token before searching or downloading:
+
+```bash
+gopro-api auth
+```
+
 ## Quick start — CLI
 
 After installing, `gopro-api` is available on your `PATH`:

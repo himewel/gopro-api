@@ -14,6 +14,7 @@ from gopro_api.api.async_gopro import AsyncGoProAPI
 from gopro_api.api.gopro import GoProAPI
 from gopro_api.api.models import (
     CapturedRange,
+    GoProAuthStatus,
     GoProMediaDownloadResponse,
     GoProMediaSearchItem,
     GoProMediaSearchParams,
@@ -114,6 +115,17 @@ class GoProClient:
             pydantic.ValidationError: If the JSON body does not match the model.
         """
         return self._api.download(media_id)
+
+    def check_auth(self) -> GoProAuthStatus:
+        """Verify that the configured access token is accepted by the API.
+
+        Returns:
+            Structured authentication status from the underlying API client.
+
+        Raises:
+            RuntimeError: If used outside ``with GoProClient()``.
+        """
+        return self._api.check_auth()
 
     # ------------------------------------------------------------------
     # High-level helpers
@@ -317,6 +329,17 @@ class AsyncGoProClient:
             pydantic.ValidationError: If the JSON body does not match the model.
         """
         return await self._api.download(media_id)
+
+    async def check_auth(self) -> GoProAuthStatus:
+        """Verify that the configured access token is accepted by the API.
+
+        Returns:
+            Structured authentication status from the underlying API client.
+
+        Raises:
+            RuntimeError: If used outside ``async with AsyncGoProClient()``.
+        """
+        return await self._api.check_auth()
 
     # ------------------------------------------------------------------
     # High-level helpers

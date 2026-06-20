@@ -30,7 +30,7 @@ flowchart TD
 | `gopro_api/config.py` | pydantic-settings `Settings` (`GP_ACCESS_TOKEN`) |
 | `gopro_api/exceptions.py` | Custom exception hierarchy |
 | `gopro_api/utils.py` | Shared helpers (resolution scoring, etc.) |
-| `gopro_api/cli/` | Typer application — `search`, `info`, `pull` commands |
+| `gopro_api/cli/` | Typer application — `search`, `info`, `pull`, `auth` commands |
 
 ## Layers
 
@@ -65,7 +65,7 @@ async with AsyncGoProAPI() as api:  # opens an aiohttp.ClientSession
 All request parameters and API responses are typed with [Pydantic v2](https://docs.pydantic.dev/) models:
 
 - **Requests** — `GoProMediaSearchParams`, `CapturedRange`.
-- **Responses** — `GoProMediaSearchResponse`, `GoProMediaDownloadResponse`, and their `_embedded` / `_pages` children (with field aliases for the GoPro API's underscore-prefixed keys).
+- **Responses** — `GoProMediaSearchResponse`, `GoProMediaDownloadResponse`, `GoProAuthStatus`, and their `_embedded` / `_pages` children (with field aliases for the GoPro API's underscore-prefixed keys).
 
 List fields in request models are serialised to comma-separated strings automatically when calling `model_dump()`.
 
@@ -78,6 +78,8 @@ A single `Settings` class (pydantic-settings) reads `GP_ACCESS_TOKEN` from:
 
 Clients accept an explicit `access_token` parameter that overrides `Settings`.
 
+`get_token_info()` reports whether a token is configured and whether it came from the environment or a `.env` file.
+
 ### 5. CLI (`gopro_api.cli`)
 
 The CLI is built with [Typer](https://typer.tiangolo.com/) and [Rich](https://github.com/Textualize/rich):
@@ -86,6 +88,7 @@ The CLI is built with [Typer](https://typer.tiangolo.com/) and [Rich](https://gi
 - `gopro_api/cli/search.py` — `search` command + `SearchPrinter`.
 - `gopro_api/cli/info.py` — `info` command + `InfoPrinter`.
 - `gopro_api/cli/pull.py` — `pull` command + `PullPrinter`.
+- `gopro_api/cli/auth.py` — `auth` command + `AuthPrinter`.
 - `gopro_api/cli/_common.py` — shared helpers.
 
 Each command delegates to `GoProClient`/`AsyncGoProClient` and passes the result to a dedicated `*Printer` class for Rich-formatted output.
@@ -108,6 +111,26 @@ sequenceDiagram
     GoProAPI-->>GoProClient: GoProMediaSearchResponse (Pydantic)
     GoProClient-->>CLI: response
     CLI->>User: Rich table or raw JSON (stdout)
+```
+
+## Data flow — `gopro-api auth`
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant CLI
+    participant AsyncGoProClient
+    participant AsyncGoProAPI
+    participant GoproCom as api.gopro.com
+
+    User->>CLI: gopro-api auth
+    CLI->>AsyncGoProClient: check_auth()
+    AsyncGoProClient->>AsyncGoProAPI: check_auth()
+    AsyncGoProAPI->>GoproCom: GET /media/search?per_page=1
+    GoproCom-->>AsyncGoProAPI: HTTP 200 or 401
+    AsyncGoProAPI-->>AsyncGoProClient: GoProAuthStatus
+    AsyncGoProClient-->>CLI: GoProAuthStatus
+    CLI->>User: Rich panel or JSON (stdout)
 ```
 
 ## Error handling
