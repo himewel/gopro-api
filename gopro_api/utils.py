@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from urllib.parse import parse_qs, unquote, urlparse
+
 from gopro_api.api.models import (
     GoProMediaDownloadFile,
     GoProMediaDownloadResponse,
@@ -15,6 +17,7 @@ __all__ = [
     "DownloadAsset",
     "is_video_filename",
     "select_video_variation",
+    "extension_from_url",
     "get_file_name",
     "pull_assets_for_response",
     "write_bytes",
@@ -76,20 +79,65 @@ def select_video_variation(
     return max(tied, key=lambda variation: (variation.height, variation.width))
 
 
-def get_file_name(root_name: str, item_number: int) -> str:
+def extension_from_url(url: str) -> str | None:
+    """Return a file extension from a CDN download URL (no leading dot).
+
+    Prefers the ``filename`` in ``response-content-disposition`` when present,
+    otherwise the URL path suffix. Library filenames can disagree with the real
+    asset (for example MultiClipEdit rows named ``*.json`` whose baked source is
+    ``*.mp4``).
+
+    Args:
+        url: Absolute HTTPS URL, optionally with a query string.
+
+    Returns:
+        Extension such as ``mp4`` or ``jpg``, or ``None`` if none is found.
+    """
+    parsed = urlparse(url)
+    disposition_values = parse_qs(parsed.query).get("response-content-disposition")
+    if disposition_values:
+        disposition = unquote(disposition_values[0])
+        for part in disposition.split(";"):
+            part = part.strip()
+            if part.lower().startswith("filename="):
+                filename = part.split("=", 1)[1].strip().strip("\"'")
+                _, _, ext = filename.rpartition(".")
+                if ext and "/" not in ext:
+                    return ext
+    _, _, ext = parsed.path.rpartition(".")
+    if not ext or "/" in ext:
+        return None
+    return ext
+
+
+def get_file_name(
+    root_name: str,
+    item_number: int,
+    *,
+    extension: str | None = None,
+) -> str:
     """Build a part filename by inserting a zero-padded index before the extension.
 
     Example: ``get_file_name("GX010001.MP4", 2)`` → ``"GX010001002.MP4"``.
+    When ``extension`` is set it replaces the suffix from ``root_name`` (useful
+    when the library name is ``.json`` but the CDN asset is ``.mp4``).
 
     Args:
         root_name: Original media filename including extension.
         item_number: Non-negative part index (three-digit zero padding).
+        extension: Optional override for the file format (no leading dot).
 
     Returns:
         Derived filename string.
     """
-    media_name, _, file_format = root_name.rpartition(".")
-    return f"{media_name}{str(item_number).zfill(3)}.{file_format}"
+    media_name, sep, file_format = root_name.rpartition(".")
+    if not sep:
+        media_name = root_name
+        file_format = ""
+    fmt = extension if extension is not None else file_format
+    if not fmt:
+        return f"{media_name}{str(item_number).zfill(3)}"
+    return f"{media_name}{str(item_number).zfill(3)}.{fmt}"
 
 
 def pull_assets_for_response(
@@ -103,6 +151,9 @@ def pull_assets_for_response(
     Video (``.mp4``): picks one variation via ``select_video_variation``.
     Non-video: returns every file in ``_embedded.files`` in enumeration order
     (no ``available`` filtering, preserving CLI behaviour for burst sets).
+
+    Output extensions come from each asset URL (content-disposition or path),
+    not from the library filename alone.
 
     Args:
         result: Parsed download-metadata response for one media id.
@@ -122,9 +173,14 @@ def pull_assets_for_response(
             target_height=target_height,
             target_width=target_width,
         )
-        return {get_file_name(name, 0): chosen}
+        return {
+            get_file_name(name, 0, extension=extension_from_url(chosen.url)): chosen
+        }
 
-    return {get_file_name(name, idx): f for idx, f in enumerate(result.embedded.files)}
+    return {
+        get_file_name(name, idx, extension=extension_from_url(f.url)): f
+        for idx, f in enumerate(result.embedded.files)
+    }
 
 
 def write_bytes(path: str, data: bytes) -> None:
