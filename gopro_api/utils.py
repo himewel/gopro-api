@@ -173,7 +173,9 @@ def pull_assets_for_response(
             target_height=target_height,
             target_width=target_width,
         )
-        return {get_file_name(name, 0, extension=extension_from_url(chosen.url)): chosen}
+        return {
+            get_file_name(name, 0, extension=extension_from_url(chosen.url)): chosen
+        }
 
     return {
         get_file_name(name, idx, extension=extension_from_url(f.url)): f
