@@ -142,8 +142,8 @@ class GoProClient:
         """Yield search result pages until one returns an empty ``_embedded.media``.
 
         Args:
-            start_date: Capture range start (inclusive semantics per API).
-            end_date: Capture range end.
+            start_date: Capture range start (inclusive calendar day).
+            end_date: Capture range end (inclusive calendar day).
             per_page: Items per page; defaults to ``self.page_size``.
             start_page: First page number to request (1-indexed).
 
@@ -170,8 +170,8 @@ class GoProClient:
         """Collect media rows across pages up to ``max_items``.
 
         Args:
-            start_date: Capture range start.
-            end_date: Capture range end.
+            start_date: Capture range start (inclusive calendar day).
+            end_date: Capture range end (inclusive calendar day).
 
         Returns:
             Up to ``self.max_items`` ``GoProMediaSearchItem`` instances.
@@ -356,8 +356,8 @@ class AsyncGoProClient:
         """Yield search pages until one returns an empty ``_embedded.media``.
 
         Args:
-            start_date: Capture range start (inclusive semantics per API).
-            end_date: Capture range end.
+            start_date: Capture range start (inclusive calendar day).
+            end_date: Capture range end (inclusive calendar day).
             per_page: Items per page; defaults to ``self.page_size``.
             start_page: First page number to request (1-indexed).
 
@@ -384,8 +384,8 @@ class AsyncGoProClient:
         """Collect media rows across pages up to ``max_items``.
 
         Args:
-            start_date: Capture range start.
-            end_date: Capture range end.
+            start_date: Capture range start (inclusive calendar day).
+            end_date: Capture range end (inclusive calendar day).
 
         Returns:
             Up to ``self.max_items`` ``GoProMediaSearchItem`` instances.

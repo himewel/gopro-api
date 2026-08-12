@@ -54,8 +54,8 @@ gopro-api auth
 After installing, `gopro-api` is available on your `PATH`:
 
 ```bash
-# List media captured on a specific day
-gopro-api search --start 2026-03-01 --end 2026-03-02
+# List media captured on a specific day (start and end are inclusive)
+gopro-api search --start 2026-03-01 --end 2026-03-01
 
 # Show download metadata for a single media item
 gopro-api info MEDIA_ID
@@ -79,7 +79,7 @@ from gopro_api.api.models import CapturedRange, GoProMediaSearchParams
 params = GoProMediaSearchParams(
     captured_range=CapturedRange(
         start=datetime.fromisoformat("2026-03-01"),
-        end=datetime.fromisoformat("2026-03-02"),
+        end=datetime.fromisoformat("2026-03-03"),
     ),
     per_page=50,
     page=1,
@@ -104,7 +104,7 @@ from gopro_api.api.models import CapturedRange, GoProMediaSearchParams
 params = GoProMediaSearchParams(
     captured_range=CapturedRange(
         start=datetime.fromisoformat("2026-03-01"),
-        end=datetime.fromisoformat("2026-03-02"),
+        end=datetime.fromisoformat("2026-03-03"),
     ),
     per_page=50,
     page=1,

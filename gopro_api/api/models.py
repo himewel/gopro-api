@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from typing import Any, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_serializer, model_serializer
@@ -44,11 +44,13 @@ class CapturedRange(BaseModel):
     """Inclusive capture date window used in search queries.
 
     Serialized to a single ``captured_range`` query string with fixed
-    ``T00:00:00.000Z`` suffixes, as required by the cloud API.
+    ``T00:00:00.000Z`` suffixes, as required by the cloud API. The API treats
+    that range as half-open ``[start, end)``, so the serialized end date is the
+    calendar day after ``end`` (unless ``end`` is already ``date.max``).
 
     Attributes:
-        start: Range start (date portion used in the wire format).
-        end: Range end (date portion used in the wire format).
+        start: Inclusive range start (date portion used in the wire format).
+        end: Inclusive range end (date portion used in the wire format).
     """
 
     start: datetime
@@ -58,12 +60,20 @@ class CapturedRange(BaseModel):
     def _serialize_captured_range(self) -> str:
         """Serialize this range for the ``captured_range`` query parameter.
 
+        Uses calendar dates only and advances the end by one day so a same-day
+        filter such as ``2024-01-07``…``2024-01-07`` becomes
+        ``2024-01-07T00:00:00.000Z,2024-01-08T00:00:00.000Z``.
+
         Returns:
             Comma-separated ISO date pair with ``Z`` UTC suffixes.
         """
+        start_day = self.start.date()
+        end_day = self.end.date()
+        if end_day < date.max:
+            end_day = end_day + timedelta(days=1)
         return (
-            f"{self.start.isoformat()}T00:00:00.000Z,"
-            f"{self.end.isoformat()}T00:00:00.000Z"
+            f"{start_day.isoformat()}T00:00:00.000Z,"
+            f"{end_day.isoformat()}T00:00:00.000Z"
         )
 
 

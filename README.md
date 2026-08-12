@@ -78,7 +78,7 @@ Global **`--timeout`** (seconds, default **`60`**) applies to API calls and to *
 Run without an installed script:
 
 ```bash
-python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-02
+python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-03
 python -m gopro_api.cli info MEDIA_ID
 python -m gopro_api.cli pull MEDIA_ID ./out
 python -m gopro_api.cli pull MEDIA_ID ./out --height 720
@@ -143,7 +143,7 @@ async def main() -> None:
     params = GoProMediaSearchParams(
         captured_range=CapturedRange(
             start=datetime.fromisoformat("2026-03-01"),
-            end=datetime.fromisoformat("2026-03-02"),
+            end=datetime.fromisoformat("2026-03-03"),
         ),
         per_page=50,
         page=1,
@@ -173,7 +173,7 @@ def main() -> None:
     params = GoProMediaSearchParams(
         captured_range=CapturedRange(
             start=datetime.fromisoformat("2026-03-01"),
-            end=datetime.fromisoformat("2026-03-02"),
+            end=datetime.fromisoformat("2026-03-03"),
         ),
         per_page=50,
         page=1,
