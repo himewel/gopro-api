@@ -156,7 +156,7 @@ gopro-api auth --tsv
 ## Running without an installed entry point
 
 ```bash
-python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-02
+python -m gopro_api.cli search --start 2026-03-01 --end 2026-03-03
 python -m gopro_api.cli info MEDIA_ID
 python -m gopro_api.cli pull MEDIA_ID ./out
 python -m gopro_api.cli pull MEDIA_ID ./out --height 720
