@@ -1957,7 +1957,7 @@ underlying HTTP session is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range start (inclusive semantics per API).</p>
+                <p>Capture range start (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -1973,7 +1973,7 @@ underlying HTTP session is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range end.</p>
+                <p>Capture range end (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -2083,8 +2083,8 @@ underlying HTTP session is opened and closed for you.</p>
 </span><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield search result pages until one returns an empty ``_embedded.media``.</span>
 </span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a>
 </span><span id="__span-0-144"><a id="__codelineno-0-144" name="__codelineno-0-144"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-145"><a id="__codelineno-0-145" name="__codelineno-0-145"></a><span class="sd">        start_date: Capture range start (inclusive semantics per API).</span>
-</span><span id="__span-0-146"><a id="__codelineno-0-146" name="__codelineno-0-146"></a><span class="sd">        end_date: Capture range end.</span>
+</span><span id="__span-0-145"><a id="__codelineno-0-145" name="__codelineno-0-145"></a><span class="sd">        start_date: Capture range start (inclusive calendar day).</span>
+</span><span id="__span-0-146"><a id="__codelineno-0-146" name="__codelineno-0-146"></a><span class="sd">        end_date: Capture range end (inclusive calendar day).</span>
 </span><span id="__span-0-147"><a id="__codelineno-0-147" name="__codelineno-0-147"></a><span class="sd">        per_page: Items per page; defaults to ``self.page_size``.</span>
 </span><span id="__span-0-148"><a id="__codelineno-0-148" name="__codelineno-0-148"></a><span class="sd">        start_page: First page number to request (1-indexed).</span>
 </span><span id="__span-0-149"><a id="__codelineno-0-149" name="__codelineno-0-149"></a>
@@ -2144,7 +2144,7 @@ underlying HTTP session is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range start.</p>
+                <p>Capture range start (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -2160,7 +2160,7 @@ underlying HTTP session is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range end.</p>
+                <p>Capture range end (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -2273,8 +2273,8 @@ match the model.</p>
 </span><span id="__span-0-170"><a id="__codelineno-0-170" name="__codelineno-0-170"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect media rows across pages up to ``max_items``.</span>
 </span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>
 </span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a><span class="sd">        start_date: Capture range start.</span>
-</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a><span class="sd">        end_date: Capture range end.</span>
+</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a><span class="sd">        start_date: Capture range start (inclusive calendar day).</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a><span class="sd">        end_date: Capture range end (inclusive calendar day).</span>
 </span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>
 </span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a><span class="sd">    Returns:</span>
 </span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a><span class="sd">        Up to ``self.max_items`` ``GoProMediaSearchItem`` instances.</span>
@@ -3383,7 +3383,7 @@ underlying <code>aiohttp.ClientSession</code> is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range start (inclusive semantics per API).</p>
+                <p>Capture range start (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -3399,7 +3399,7 @@ underlying <code>aiohttp.ClientSession</code> is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range end.</p>
+                <p>Capture range end (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -3509,8 +3509,8 @@ underlying <code>aiohttp.ClientSession</code> is opened and closed for you.</p>
 </span><span id="__span-0-356"><a id="__codelineno-0-356" name="__codelineno-0-356"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield search pages until one returns an empty ``_embedded.media``.</span>
 </span><span id="__span-0-357"><a id="__codelineno-0-357" name="__codelineno-0-357"></a>
 </span><span id="__span-0-358"><a id="__codelineno-0-358" name="__codelineno-0-358"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-359"><a id="__codelineno-0-359" name="__codelineno-0-359"></a><span class="sd">        start_date: Capture range start (inclusive semantics per API).</span>
-</span><span id="__span-0-360"><a id="__codelineno-0-360" name="__codelineno-0-360"></a><span class="sd">        end_date: Capture range end.</span>
+</span><span id="__span-0-359"><a id="__codelineno-0-359" name="__codelineno-0-359"></a><span class="sd">        start_date: Capture range start (inclusive calendar day).</span>
+</span><span id="__span-0-360"><a id="__codelineno-0-360" name="__codelineno-0-360"></a><span class="sd">        end_date: Capture range end (inclusive calendar day).</span>
 </span><span id="__span-0-361"><a id="__codelineno-0-361" name="__codelineno-0-361"></a><span class="sd">        per_page: Items per page; defaults to ``self.page_size``.</span>
 </span><span id="__span-0-362"><a id="__codelineno-0-362" name="__codelineno-0-362"></a><span class="sd">        start_page: First page number to request (1-indexed).</span>
 </span><span id="__span-0-363"><a id="__codelineno-0-363" name="__codelineno-0-363"></a>
@@ -3574,7 +3574,7 @@ underlying <code>aiohttp.ClientSession</code> is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range start.</p>
+                <p>Capture range start (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -3590,7 +3590,7 @@ underlying <code>aiohttp.ClientSession</code> is opened and closed for you.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Capture range end.</p>
+                <p>Capture range end (inclusive calendar day).</p>
               </div>
             </td>
             <td>
@@ -3703,8 +3703,8 @@ match the model.</p>
 </span><span id="__span-0-384"><a id="__codelineno-0-384" name="__codelineno-0-384"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect media rows across pages up to ``max_items``.</span>
 </span><span id="__span-0-385"><a id="__codelineno-0-385" name="__codelineno-0-385"></a>
 </span><span id="__span-0-386"><a id="__codelineno-0-386" name="__codelineno-0-386"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-387"><a id="__codelineno-0-387" name="__codelineno-0-387"></a><span class="sd">        start_date: Capture range start.</span>
-</span><span id="__span-0-388"><a id="__codelineno-0-388" name="__codelineno-0-388"></a><span class="sd">        end_date: Capture range end.</span>
+</span><span id="__span-0-387"><a id="__codelineno-0-387" name="__codelineno-0-387"></a><span class="sd">        start_date: Capture range start (inclusive calendar day).</span>
+</span><span id="__span-0-388"><a id="__codelineno-0-388" name="__codelineno-0-388"></a><span class="sd">        end_date: Capture range end (inclusive calendar day).</span>
 </span><span id="__span-0-389"><a id="__codelineno-0-389" name="__codelineno-0-389"></a>
 </span><span id="__span-0-390"><a id="__codelineno-0-390" name="__codelineno-0-390"></a><span class="sd">    Returns:</span>
 </span><span id="__span-0-391"><a id="__codelineno-0-391" name="__codelineno-0-391"></a><span class="sd">        Up to ``self.max_items`` ``GoProMediaSearchItem`` instances.</span>

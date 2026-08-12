@@ -1213,7 +1213,9 @@ Defaults match typical Quik / cloud library expectations.</p>
 
         <p>Inclusive capture date window used in search queries.</p>
 <p>Serialized to a single <code>captured_range</code> query string with fixed
-<code>T00:00:00.000Z</code> suffixes, as required by the cloud API.</p>
+<code>T00:00:00.000Z</code> suffixes, as required by the cloud API. The API treats
+that range as half-open <code>[start, end)</code>, so the serialized end date is the
+calendar day after <code>end</code> (unless <code>end</code> is already <code>date.max</code>).</p>
 
 
 <p><span class="doc-section-title">Attributes:</span></p>
@@ -1233,7 +1235,7 @@ Defaults match typical Quik / cloud library expectations.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Range start (date portion used in the wire format).</p>
+                <p>Inclusive range start (date portion used in the wire format).</p>
               </div>
             </td>
           </tr>
@@ -1244,7 +1246,7 @@ Defaults match typical Quik / cloud library expectations.</p>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Range end (date portion used in the wire format).</p>
+                <p>Inclusive range end (date portion used in the wire format).</p>
               </div>
             </td>
           </tr>
